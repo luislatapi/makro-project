@@ -10,7 +10,7 @@ Sitio estático (HTML + CSS + JS, sin dependencias) desplegado en Vercel.
 | `/diseno/` | Diseño y Renders · Diseño Industrial · Diseño de Interiores |
 | `/fabricacion/` | Impresión en 3D · Corte y Grabado CNC |
 | `/marca-contenido/` | Branding · Fotografía · Fotografía de Producto · Grabación con Drone · Edición de Video |
-| `/crecimiento-digital/` | Marketing Digital · Ecommerce · Aplicaciones de IA para Negocios |
+| `/crecimiento-digital/` | Páginas Web y Landing Pages · Marketing Digital · Ecommerce · Aplicaciones de IA para Negocios |
 
 Estilos compartidos en `assets/styles.css` y comportamiento en `assets/main.js`.
 
