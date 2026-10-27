@@ -64,7 +64,7 @@ p{margin:0 0 1em}
 .hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
 .crumbs{color:var(--muted);margin-bottom:24px}
 .crumbs a:hover{color:var(--accent)}
-.flow{list-style:none;display:grid;grid-template-columns:repeat(4,1fr);margin:80px auto 0;padding:0 24px;position:relative}
+.flow{list-style:none;display:grid;grid-template-columns:repeat(5,1fr);margin:80px auto 0;padding:0 24px;position:relative}
 .flow li{border-top:1px solid var(--line);border-left:1px solid var(--line)}
 .flow li:last-child{border-right:1px solid var(--line)}
 .flow a{display:flex;flex-direction:column;gap:6px;padding:22px 22px 26px;height:100%;transition:background .2s}
@@ -81,7 +81,9 @@ p{margin:0 0 1em}
 .sec-head{max-width:720px;margin-bottom:56px}
 
 /* category cards */
-.cats{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+.cats{display:grid;grid-template-columns:repeat(6,1fr);gap:20px}
+.cat{grid-column:span 2}
+.cat:nth-child(n+4){grid-column:span 3}
 .cat{position:relative;background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:34px;display:flex;flex-direction:column;transition:transform .25s,box-shadow .25s}
 .cat:hover{transform:translateY(-4px);box-shadow:0 20px 40px -24px rgba(0,0,0,.35)}
 .cat-link{position:absolute;inset:0;z-index:1;border-radius:var(--r)}
@@ -142,7 +144,7 @@ p{margin:0 0 1em}
 /* footer */
 .foot{background:var(--dark);color:#fff;padding:72px 0 40px}
 .foot .logo-mark{color:var(--ink)}
-.foot-cols{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin:40px 0 48px}
+.foot-cols{display:grid;grid-template-columns:repeat(5,1fr);gap:24px;margin:40px 0 48px}
 .foot-cols div{display:grid;gap:8px;align-content:start}
 .foot-cols a{color:var(--dim);font-size:15px}
 .foot-cols a:hover{color:var(--accent)}
@@ -162,8 +164,10 @@ p{margin:0 0 1em}
   .menu a:not(.btn){padding:14px 12px;font-size:17px}
   .menu .btn{margin-top:8px;justify-content:center}
   .flow{grid-template-columns:repeat(2,1fr)}
-  .flow li:nth-child(2){border-right:1px solid var(--line)}
+  .flow li{border-right:1px solid var(--line)}
+  .flow li:last-child{grid-column:1/-1}
   .cats{grid-template-columns:1fr}
+  .cat,.cat:nth-child(n+4){grid-column:auto}
   .steps{grid-template-columns:repeat(2,1fr);row-gap:36px}
   .detail-in,.contact-in{grid-template-columns:1fr;gap:40px}
   .svc-detail.alt .detail-visual{order:0}

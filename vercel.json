@@ -1,4 +1,8 @@
 {
   "cleanUrls": true,
-  "trailingSlash": true
+  "trailingSlash": true,
+  "redirects": [
+    { "source": "/marca-contenido", "destination": "/contenido/", "permanent": true },
+    { "source": "/marca-contenido/", "destination": "/contenido/", "permanent": true }
+  ]
 }
