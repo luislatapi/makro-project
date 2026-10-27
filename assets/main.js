@@ -1,5 +1,5 @@
 // ⚙️ Cambia este número por el WhatsApp de Makro Project (código de país + número, sin espacios ni "+")
-const WHATSAPP = "520000000000";
+const WHATSAPP = "525537179423";
 
 // Menú móvil
 const toggle = document.querySelector(".nav-toggle");
