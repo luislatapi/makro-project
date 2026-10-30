@@ -13,6 +13,17 @@ Sitio estático (HTML + CSS + JS, sin dependencias) desplegado en Vercel.
 | `/contenido/` | Fotografía · Fotografía de Producto · Grabación con Drone · Edición de Video |
 | `/crecimiento-digital/` | Páginas Web y Landing Pages · Marketing Digital · Ecommerce · Aplicaciones de IA para Negocios |
 
+Cada servicio tiene además su propia página en `/<área>/<servicio>/` (por ejemplo `/contenido/drone/`), con qué incluye, qué recibe el cliente, proceso, qué necesitamos, preguntas frecuentes y servicios relacionados.
+
+## Editar contenido
+
+Las páginas se generan con un script; no edites los `index.html` a mano.
+
+- `scripts/build.mjs`: áreas, servicios (nombre, descripción, qué incluye) y plantillas.
+- `scripts/detalles.mjs`: contenido de cada página de servicio.
+
+Después de editar, ejecuta `node scripts/build.mjs` y sube los cambios a `main`.
+
 Estilos compartidos en `assets/styles.css` y comportamiento en `assets/main.js`.
 
 ## Configurar WhatsApp
