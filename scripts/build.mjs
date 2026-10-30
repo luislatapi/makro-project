@@ -441,7 +441,7 @@ ${nav("../../", c.slug)}
       <h2 class="h-md">Qué necesitamos de ti</h2>
       <p class="muted">Con esta información te mandamos una propuesta clara de alcance, tiempos y costo.</p>
       <ul class="checks">${d.necesitamos.map((x) => `<li>${x}</li>`).join("")}</ul>
-      <a class="btn" href="#contacto">Enviar mi información ${icon("arrow", "ico-sm")}</a>
+      <a class="btn" href="#contacto">Contactar ${icon("arrow", "ico-sm")}</a>
     </div>
     <div>
       <p class="eyebrow mono">// Preguntas frecuentes</p>
