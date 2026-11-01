@@ -163,6 +163,20 @@ const CATS = [
   },
 ];
 
+// Productos se muestra como una categoría más (06) en menú, inicio y "Lo que sigue".
+const PROD_CAT = {
+  slug: "productos",
+  num: String(CATS.length + 1).padStart(2, "0"),
+  name: "Productos",
+  tag: "Hecho a la medida",
+  lead: "Productos que diseñamos y fabricamos a la medida con impresión 3D y corte CNC, listos para tu espacio, tu marca o tu evento.",
+};
+// Lista unificada para navegación: { slug, num, name, tag, lead, items: [{ name, id, icon }] }
+const NAV_CATS = [
+  ...CATS.map((c) => ({ ...c, items: c.services.map((s) => ({ name: s.name, id: s.id, icon: s.icon })) })),
+  { ...PROD_CAT, items: PRODUCTOS.map((x) => ({ name: x.nombre, id: x.id, icon: x.icon })) },
+];
+
 const PROCESS = [
   ["Brief", "Nos cuentas tu idea, objetivo y presupuesto."],
   ["Propuesta", "Te enviamos alcance, tiempos y cotización clara."],
@@ -190,14 +204,14 @@ const head = (title, desc, r) => `<!doctype html>
 <body>`;
 
 const nav = (r, active) => {
-  const links = CATS.map(
+  const links = NAV_CATS.map(
     (c) => `<a href="${r}${c.slug}/"${active === c.slug ? ' aria-current="page"' : ""}><span class="mono">${c.num}</span> ${c.name}</a>`
   ).join("");
   return `<header class="nav">
   <div class="wrap nav-in">
     <a class="logo" href="${r}" aria-label="Makro Project, inicio"><span class="logo-mark">M</span><span>MAKRO<b>PROJECT</b></span></a>
     <button class="nav-toggle" aria-expanded="false" aria-controls="menu" aria-label="Abrir menú"><span></span><span></span></button>
-    <nav id="menu" class="menu">${links}<a class="nav-prod" href="${r}productos/"${active === "productos" ? ' aria-current="page"' : ""}>Productos</a><a class="btn btn-sm" href="#contacto">Cotizar</a></nav>
+    <nav id="menu" class="menu">${links}<a class="btn btn-sm" href="#contacto">Cotizar</a></nav>
   </div>
 </header>`;
 };
@@ -274,25 +288,25 @@ ${nav("./")}
     </div>
   </div>
   <ol class="wrap flow" aria-label="Cómo se conectan nuestras áreas">
-    ${CATS.map((c) => `<li><a href="./${c.slug}/"><span class="mono">${c.num}</span><strong>${c.name}</strong><em class="mono">${c.tag}</em></a></li>`).join("")}
+    ${NAV_CATS.map((c) => `<li><a href="./${c.slug}/"><span class="mono">${c.num}</span><strong>${c.name}</strong><em class="mono">${c.tag}</em></a></li>`).join("")}
   </ol>
 </section>
 
 <section class="section" id="servicios">
   <div class="wrap">
     <div class="sec-head">
-      <p class="eyebrow mono">// Áreas</p>
-      <h2>Cinco áreas que se conectan</h2>
-      <p class="muted">Cada área funciona por separado, pero juntas cubren todo el camino de un proyecto: de la primera idea hasta la primera venta.</p>
+      <p class="eyebrow mono">// Categorías</p>
+      <h2>Seis categorías que se conectan</h2>
+      <p class="muted">Cada categoría funciona por separado, pero juntas cubren todo el camino de un proyecto: de la primera idea hasta la primera venta.</p>
     </div>
     <div class="cats">
-      ${CATS.map((c) => `<article class="cat">
+      ${NAV_CATS.map((c) => `<article class="cat">
         <a class="cat-link" href="./${c.slug}/" aria-label="Ver ${c.name}"></a>
         <div class="cat-top"><span class="mono num">${c.num}</span><span class="mono tag">${c.tag}</span></div>
         <h3>${c.name}</h3>
         <p class="muted">${c.lead}</p>
-        <ul class="chips">${c.services.map((s) => `<li><a href="./${c.slug}/${s.id}/">${icon(s.icon, "ico-sm")}${s.name}</a></li>`).join("")}</ul>
-        <span class="cat-more mono">Ver área ${icon("arrow", "ico-sm")}</span>
+        <ul class="chips">${c.items.map((s) => `<li><a href="./${c.slug}/${s.id}/">${icon(s.icon, "ico-sm")}${s.name}</a></li>`).join("")}</ul>
+        <span class="cat-more mono">Ver ${c.slug === "productos" ? "productos" : "área"} ${icon("arrow", "ico-sm")}</span>
       </article>`).join("")}
     </div>
   </div>
@@ -325,18 +339,6 @@ ${nav("./")}
   </div>
 </section>
 
-<section class="section section-alt" id="productos">
-  <div class="wrap">
-    <div class="sec-head">
-      <p class="eyebrow mono">// Productos</p>
-      <h2>Productos que fabricamos</h2>
-      <p class="muted">Además de nuestros servicios, diseñamos y fabricamos productos a la medida, listos para tu espacio, tu marca o tu evento.</p>
-    </div>
-    ${prodCards("./")}
-    <p class="also"><a class="btn btn-ghost" href="./productos/">Ver todos los productos ${icon("arrow", "ico-sm")}</a></p>
-  </div>
-</section>
-
 <section class="section band">
   <div class="wrap band-in">
     <p class="eyebrow mono">// Ejemplo de proyecto integral</p>
@@ -349,8 +351,8 @@ ${footer("./")}`;
 
 // ---------- PÁGINAS DE ÁREA ----------
 const catPage = (c, idx) => {
-  const others = CATS.filter((x) => x.slug !== c.slug);
-  const next = CATS[(idx + 1) % CATS.length];
+  const others = NAV_CATS.filter((x) => x.slug !== c.slug);
+  const next = NAV_CATS[idx + 1];
   return `${head(`${c.name} · Makro Project`, c.lead, "../")}
 ${nav("../", c.slug)}
 <main>
@@ -398,8 +400,8 @@ ${c.services.map((s, i) => `<section class="section svc-detail${i % 2 ? " alt" :
       ${others.map((o) => `<a class="svc" href="../${o.slug}/">
         <span class="mono small dim">${o.num} · ${o.tag}</span>
         <strong>${o.name}</strong>
-        <span class="small dim">${o.services.map((s) => s.name).join(" · ")}</span>
-        <span class="mono small cat-more">Ver área ${icon("arrow", "ico-sm")}</span>
+        <span class="small dim">${o.items.map((s) => s.name).join(" · ")}</span>
+        <span class="mono small cat-more">Ver ${o.slug === "productos" ? "productos" : "área"} ${icon("arrow", "ico-sm")}</span>
       </a>`).join("")}
     </div>
   </div>
@@ -516,7 +518,7 @@ ${nav("../", "productos")}
   <div class="grid-bg" aria-hidden="true"></div>
   <div class="wrap hero-in">
     <nav class="crumbs mono small" aria-label="Ruta"><a href="../">Inicio</a> / <span>Productos</span></nav>
-    <p class="eyebrow mono">// Catálogo</p>
+    <p class="eyebrow mono">// Categoría ${PROD_CAT.num} · ${PROD_CAT.tag}</p>
     <h1>Productos</h1>
     <p class="lead">Productos que diseñamos y fabricamos a la medida con nuestro taller de impresión 3D y corte CNC. Elige uno y lo personalizamos para ti.</p>
   </div>
