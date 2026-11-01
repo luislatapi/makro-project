@@ -4,6 +4,7 @@ import { mkdirSync, writeFileSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { DETALLES } from "./detalles.mjs";
+import { PRODUCTOS } from "./productos.mjs";
 
 const OUT = join(dirname(fileURLToPath(import.meta.url)), "..");
 
@@ -22,6 +23,9 @@ const ICON = {
   video: '<rect x="2" y="5" width="20" height="14" rx="2"/><path d="m10 9 5 3-5 3V9Z"/><path d="M2 9h3M2 15h3M19 9h3M19 15h3"/>',
   web: '<rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 9h20"/><path d="M5 6.5h.01M8 6.5h.01"/><path d="M6 13h7M6 16h4"/><rect x="15" y="12" width="4" height="5" rx=".5"/>',
   product: '<path d="M12 3 4 7v10l8 4 8-4V7l-8-4Z"/><path d="m4 7 8 4 8-4M12 11v10"/><path d="M18 2l1 1.5M21 4.5 19.5 5M15.5 2.2 16 3.8"/>',
+  lattice: '<rect x="3" y="3" width="18" height="18" rx="1"/><path d="M12 3c-3 3-3 6 0 9s3 6 0 9M12 3c3 3 3 6 0 9s-3 6 0 9"/><path d="M3 12c3-3 6-3 9 0s6 3 9 0"/>',
+  trophy: '<path d="M8 21h8M12 17v4"/><path d="M7 4h10v5a5 5 0 0 1-10 0V4Z"/><path d="M7 6H4v1a3 3 0 0 0 3 3M17 6h3v1a3 3 0 0 1-3 3"/>',
+  box: '<path d="M21 8 12 3 3 8v8l9 5 9-5V8Z"/><path d="m3 8 9 5 9-5M12 13v8"/>',
   arrow:'<path d="M5 12h14M13 6l6 6-6 6"/>',
 };
 const icon = (k, cls = "ico") =>
@@ -193,7 +197,7 @@ const nav = (r, active) => {
   <div class="wrap nav-in">
     <a class="logo" href="${r}" aria-label="Makro Project, inicio"><span class="logo-mark">M</span><span>MAKRO<b>PROJECT</b></span></a>
     <button class="nav-toggle" aria-expanded="false" aria-controls="menu" aria-label="Abrir menú"><span></span><span></span></button>
-    <nav id="menu" class="menu">${links}<a class="btn btn-sm" href="#contacto">Cotizar</a></nav>
+    <nav id="menu" class="menu">${links}<a class="nav-prod" href="${r}productos/"${active === "productos" ? ' aria-current="page"' : ""}>Productos</a><a class="btn btn-sm" href="#contacto">Cotizar</a></nav>
   </div>
 </header>`;
 };
@@ -207,10 +211,11 @@ const contact = (preset = "") => `<section class="contact" id="contacto">
     </div>
     <form class="form" data-contact>
       <label>Nombre<input name="nombre" required autocomplete="name"></label>
-      <label>Servicio
+      <label>Servicio o producto
         <select name="servicio">
           <option value="">Selecciona…</option>
           ${CATS.map((c) => `<optgroup label="${c.name}">${c.services.map((s) => `<option${preset === s.name ? " selected" : ""}>${s.name}</option>`).join("")}</optgroup>`).join("")}
+          <optgroup label="Productos">${PRODUCTOS.map((x) => `<option${preset === x.nombre ? " selected" : ""}>${x.nombre}</option>`).join("")}</optgroup>
           <option>Varios / no estoy seguro</option>
         </select>
       </label>
@@ -225,6 +230,7 @@ const footer = (r) => `<footer class="foot">
     <a class="logo" href="${r}"><span class="logo-mark">M</span><span>MAKRO<b>PROJECT</b></span></a>
     <div class="foot-cols">
       ${CATS.map((c) => `<div><a class="foot-h" href="${r}${c.slug}/">${c.name}</a>${c.services.map((s) => `<a href="${r}${c.slug}/${s.id}/">${s.name}</a>`).join("")}</div>`).join("")}
+      <div><a class="foot-h" href="${r}productos/">Productos</a>${PRODUCTOS.map((x) => `<a href="${r}productos/${x.id}/">${x.nombre}</a>`).join("")}</div>
     </div>
     <p class="mono muted small">© <span data-year></span> Makro Project · Diseño, fabricación y crecimiento</p>
   </div>
@@ -236,6 +242,22 @@ const footer = (r) => `<footer class="foot">
 // ---------- HOME ----------
 const allServices = CATS.flatMap((c) => c.services.map((s) => ({ ...s, cat: c })));
 const byId = Object.fromEntries(allServices.map((s) => [s.id, s]));
+
+// Tarjetas de producto (catálogo e inicio). r = prefijo a la raíz.
+const prodVisual = (x, r, cls = "") => x.imagenes?.length
+  ? `<div class="prod-visual has-img ${cls}"><img src="${r}assets/${x.imagenes[0]}" alt="${x.nombre}" loading="lazy"></div>`
+  : `<div class="prod-visual ${cls}" aria-hidden="true"><div class="grid-bg"></div>${icon(x.icon, "ico-xl")}</div>`;
+const prodCards = (r) => `<div class="prod-grid">
+      ${PRODUCTOS.map((x) => `<a class="prod" href="${r}productos/${x.id}/">
+        ${prodVisual(x, r)}
+        <div class="prod-body">
+          <span class="mono small accent">${x.etiqueta}</span>
+          <strong>${x.nombre}</strong>
+          <span class="muted">${x.resumen}</span>
+          <span class="mono small cat-more">Ver producto ${icon("arrow", "ico-sm")}</span>
+        </div>
+      </a>`).join("")}
+    </div>`;
 
 const home = `${head("Makro Project · Diseño, fabricación y crecimiento", "Estudio integral: diseño y renders, impresión 3D, CNC, branding, fotografía, drone, video, páginas web, marketing digital, ecommerce e IA para negocios.", "./")}
 ${nav("./")}
@@ -300,6 +322,18 @@ ${nav("./")}
       <h2>Un proceso simple</h2>
     </div>
     <ol class="steps">${PROCESS.map(([t, d], i) => `<li><span class="mono num">0${i + 1}</span><strong>${t}</strong><p class="muted">${d}</p></li>`).join("")}</ol>
+  </div>
+</section>
+
+<section class="section section-alt" id="productos">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow mono">// Productos</p>
+      <h2>Productos que fabricamos</h2>
+      <p class="muted">Además de nuestros servicios, diseñamos y fabricamos productos a la medida, listos para tu espacio, tu marca o tu evento.</p>
+    </div>
+    ${prodCards("./")}
+    <p class="also"><a class="btn btn-ghost" href="./productos/">Ver todos los productos ${icon("arrow", "ico-sm")}</a></p>
   </div>
 </section>
 
@@ -474,6 +508,127 @@ ${contact(s.name)}
 ${footer("../../")}`;
 };
 
+// ---------- PRODUCTOS ----------
+const prodIndex = `${head("Productos · Makro Project", "Productos diseñados y fabricados a la medida por Makro Project: celosías CNC en metal y madera, trofeos deportivos impresos en 3D y más.", "../")}
+${nav("../", "productos")}
+<main>
+<section class="hero hero-sub">
+  <div class="grid-bg" aria-hidden="true"></div>
+  <div class="wrap hero-in">
+    <nav class="crumbs mono small" aria-label="Ruta"><a href="../">Inicio</a> / <span>Productos</span></nav>
+    <p class="eyebrow mono">// Catálogo</p>
+    <h1>Productos</h1>
+    <p class="lead">Productos que diseñamos y fabricamos a la medida con nuestro taller de impresión 3D y corte CNC. Elige uno y lo personalizamos para ti.</p>
+  </div>
+</section>
+<section class="section">
+  <div class="wrap">
+    ${prodCards("../")}
+  </div>
+</section>
+<section class="section section-dark">
+  <div class="wrap band-in">
+    <p class="eyebrow mono">// A la medida</p>
+    <p class="band-text" style="color:#fff">¿Buscas algo que no está aquí? Si se puede diseñar, lo podemos fabricar.</p>
+    <p style="margin-top:28px"><a class="btn btn-accent" href="#contacto">Cuéntanos tu idea ${icon("arrow", "ico-sm")}</a></p>
+  </div>
+</section>
+${contact()}
+</main>
+${footer("../")}`;
+
+const prodPage = (x) => {
+  const rel = x.relacionados.map((id) => byId[id]).filter(Boolean);
+  const otros = PRODUCTOS.filter((o) => o.id !== x.id);
+  return `${head(`${x.nombre} · Makro Project`, x.resumen, "../../")}
+${nav("../../", "productos")}
+<main>
+<section class="hero hero-sub">
+  <div class="grid-bg" aria-hidden="true"></div>
+  <div class="wrap hero-svc">
+    <div>
+      <nav class="crumbs mono small" aria-label="Ruta"><a href="../../">Inicio</a> / <a href="../">Productos</a> / <span>${x.nombre}</span></nav>
+      <p class="eyebrow mono">// Producto · ${x.etiqueta}</p>
+      <h1 class="h1-svc">${x.nombre}</h1>
+      <p class="lead">${x.intro}</p>
+      <div class="hero-cta">
+        <a class="btn" href="#contacto">Cotizar ${x.nombre} ${icon("arrow", "ico-sm")}</a>
+        <a class="btn btn-ghost" href="#como">Cómo lo hacemos</a>
+      </div>
+    </div>
+    ${prodVisual(x, "../../", "hero-visual")}
+  </div>
+</section>
+${x.imagenes?.length > 1 ? `<section class="section"><div class="wrap gallery">${x.imagenes.map((im) => `<img src="../../assets/${im}" alt="${x.nombre}" loading="lazy">`).join("")}</div></section>` : ""}
+<section class="section">
+  <div class="wrap">
+    <div class="info-grid">
+      ${x.opciones.map(([t, items]) => `<article class="info">
+        <h2 class="h-sm">${t}</h2>
+        <ul class="checks">${items.map((i) => `<li>${i}</li>`).join("")}</ul>
+      </article>`).join("")}
+      <article class="info info-accent">
+        <h2 class="h-sm">Personalízalo</h2>
+        <ul class="checks checks-ink">${x.personaliza.map((i) => `<li>${i}</li>`).join("")}</ul>
+      </article>
+    </div>
+    <div class="usos">
+      <h2 class="h-sm">Ideal para</h2>
+      <ul class="chips chips-lg">${x.usos.map((u) => `<li><span>${u}</span></li>`).join("")}</ul>
+    </div>
+  </div>
+</section>
+
+<section class="section section-dark" id="como">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow mono">// Cómo lo hacemos</p>
+      <h2>Paso a paso</h2>
+    </div>
+    <ol class="steps steps-dark">${x.proceso.map(([t, d], k) => `<li><span class="mono num">0${k + 1}</span><strong>${t}</strong><p class="dim">${d}</p></li>`).join("")}</ol>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap two-col">
+    <div>
+      <p class="eyebrow mono">// Para cotizar</p>
+      <h2 class="h-md">Qué necesitamos de ti</h2>
+      <p class="muted">Con esta información te mandamos una cotización con diseño, costo y fecha de entrega.</p>
+      <ul class="checks">${x.necesitamos.map((i) => `<li>${i}</li>`).join("")}</ul>
+      <a class="btn" href="#contacto">Contactar ${icon("arrow", "ico-sm")}</a>
+    </div>
+    <div>
+      <p class="eyebrow mono">// Preguntas frecuentes</p>
+      <h2 class="h-md">Dudas comunes</h2>
+      <div class="faqs">${x.faqs.map(([q, a]) => `<details><summary>${q}</summary><p class="muted">${a}</p></details>`).join("")}</div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow mono">// Detrás de este producto</p>
+      <h2>Servicios relacionados</h2>
+    </div>
+    <div class="rel-grid">
+      ${rel.map((o) => `<a class="rel" href="../../${o.cat.slug}/${o.id}/">
+        <span class="mono small muted">${o.cat.name}</span>
+        ${icon(o.icon)}
+        <strong>${o.name}</strong>
+        <span class="small muted">${o.desc}</span>
+        <span class="mono small cat-more">Ver servicio ${icon("arrow", "ico-sm")}</span>
+      </a>`).join("")}
+    </div>
+    ${otros.length ? `<p class="also muted">Otros productos: ${otros.map((o) => `<a class="ul-ink" href="../${o.id}/">${o.nombre}</a>`).join(" · ")}</p>` : ""}
+  </div>
+</section>
+${contact(x.nombre)}
+</main>
+${footer("../../")}`;
+};
+
 // ---------- ESCRITURA ----------
 writeFileSync(join(OUT, "index.html"), home);
 CATS.forEach((c, i) => {
@@ -484,4 +639,10 @@ CATS.forEach((c, i) => {
     writeFileSync(join(OUT, c.slug, s.id, "index.html"), svcPage(c, s, k));
   });
 });
-console.log(`ok · ${CATS.length} áreas · ${allServices.length} servicios`);
+mkdirSync(join(OUT, "productos"), { recursive: true });
+writeFileSync(join(OUT, "productos", "index.html"), prodIndex);
+PRODUCTOS.forEach((x) => {
+  mkdirSync(join(OUT, "productos", x.id), { recursive: true });
+  writeFileSync(join(OUT, "productos", x.id, "index.html"), prodPage(x));
+});
+console.log(`ok · ${CATS.length} áreas · ${allServices.length} servicios · ${PRODUCTOS.length} productos`);

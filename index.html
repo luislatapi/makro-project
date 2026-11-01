@@ -19,7 +19,7 @@
   <div class="wrap nav-in">
     <a class="logo" href="./" aria-label="Makro Project, inicio"><span class="logo-mark">M</span><span>MAKRO<b>PROJECT</b></span></a>
     <button class="nav-toggle" aria-expanded="false" aria-controls="menu" aria-label="Abrir menú"><span></span><span></span></button>
-    <nav id="menu" class="menu"><a href="./diseno/"><span class="mono">01</span> Diseño</a><a href="./fabricacion/"><span class="mono">02</span> Fabricación</a><a href="./marca/"><span class="mono">03</span> Marca</a><a href="./contenido/"><span class="mono">04</span> Contenido</a><a href="./crecimiento-digital/"><span class="mono">05</span> Crecimiento Digital</a><a class="btn btn-sm" href="#contacto">Cotizar</a></nav>
+    <nav id="menu" class="menu"><a href="./diseno/"><span class="mono">01</span> Diseño</a><a href="./fabricacion/"><span class="mono">02</span> Fabricación</a><a href="./marca/"><span class="mono">03</span> Marca</a><a href="./contenido/"><span class="mono">04</span> Contenido</a><a href="./crecimiento-digital/"><span class="mono">05</span> Crecimiento Digital</a><a class="nav-prod" href="./productos/">Productos</a><a class="btn btn-sm" href="#contacto">Cotizar</a></nav>
   </div>
 </header>
 <main>
@@ -179,6 +179,36 @@
   </div>
 </section>
 
+<section class="section section-alt" id="productos">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow mono">// Productos</p>
+      <h2>Productos que fabricamos</h2>
+      <p class="muted">Además de nuestros servicios, diseñamos y fabricamos productos a la medida, listos para tu espacio, tu marca o tu evento.</p>
+    </div>
+    <div class="prod-grid">
+      <a class="prod" href="./productos/celosias/">
+        <div class="prod-visual " aria-hidden="true"><div class="grid-bg"></div><svg class="ico-xl" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="M12 3c-3 3-3 6 0 9s3 6 0 9M12 3c3 3 3 6 0 9s-3 6 0 9"/><path d="M3 12c3-3 6-3 9 0s6 3 9 0"/></svg></div>
+        <div class="prod-body">
+          <span class="mono small accent">Metal y madera · Corte CNC</span>
+          <strong>Celosías CNC</strong>
+          <span class="muted">Celosías decorativas a la medida en madera o metal para dividir espacios, fachadas, plafones y muebles.</span>
+          <span class="mono small cat-more">Ver producto <svg class="ico-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </div>
+      </a><a class="prod" href="./productos/trofeos/">
+        <div class="prod-visual " aria-hidden="true"><div class="grid-bg"></div><svg class="ico-xl" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 21h8M12 17v4"/><path d="M7 4h10v5a5 5 0 0 1-10 0V4Z"/><path d="M7 6H4v1a3 3 0 0 0 3 3M17 6h3v1a3 3 0 0 1-3 3"/></svg></div>
+        <div class="prod-body">
+          <span class="mono small accent">Impresos en 3D · Personalizados</span>
+          <strong>Trofeos Deportivos</strong>
+          <span class="muted">Trofeos y medallas únicos impresos en 3D para torneos, ligas, carreras y eventos, con el diseño de tu evento.</span>
+          <span class="mono small cat-more">Ver producto <svg class="ico-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </div>
+      </a>
+    </div>
+    <p class="also"><a class="btn btn-ghost" href="./productos/">Ver todos los productos <svg class="ico-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></p>
+  </div>
+</section>
+
 <section class="section band">
   <div class="wrap band-in">
     <p class="eyebrow mono">// Ejemplo de proyecto integral</p>
@@ -194,10 +224,11 @@
     </div>
     <form class="form" data-contact>
       <label>Nombre<input name="nombre" required autocomplete="name"></label>
-      <label>Servicio
+      <label>Servicio o producto
         <select name="servicio">
           <option value="">Selecciona…</option>
           <optgroup label="Diseño"><option>Diseño y Renders</option><option>Diseño Industrial</option><option>Diseño de Interiores</option></optgroup><optgroup label="Fabricación"><option>Impresión en 3D</option><option>Corte y Grabado CNC</option></optgroup><optgroup label="Marca"><option>Branding</option></optgroup><optgroup label="Contenido"><option>Fotografía</option><option>Fotografía de Producto</option><option>Grabación con Drone</option><option>Edición de Video</option></optgroup><optgroup label="Crecimiento Digital"><option>Creación de Páginas Web y Landing Pages</option><option>Marketing Digital</option><option>Ecommerce</option><option>Aplicaciones de IA para Negocios</option></optgroup>
+          <optgroup label="Productos"><option>Celosías CNC</option><option>Trofeos Deportivos</option></optgroup>
           <option>Varios / no estoy seguro</option>
         </select>
       </label>
@@ -212,6 +243,7 @@
     <a class="logo" href="./"><span class="logo-mark">M</span><span>MAKRO<b>PROJECT</b></span></a>
     <div class="foot-cols">
       <div><a class="foot-h" href="./diseno/">Diseño</a><a href="./diseno/renders/">Diseño y Renders</a><a href="./diseno/industrial/">Diseño Industrial</a><a href="./diseno/interiores/">Diseño de Interiores</a></div><div><a class="foot-h" href="./fabricacion/">Fabricación</a><a href="./fabricacion/impresion-3d/">Impresión en 3D</a><a href="./fabricacion/cnc/">Corte y Grabado CNC</a></div><div><a class="foot-h" href="./marca/">Marca</a><a href="./marca/branding/">Branding</a></div><div><a class="foot-h" href="./contenido/">Contenido</a><a href="./contenido/fotografia/">Fotografía</a><a href="./contenido/fotografia-producto/">Fotografía de Producto</a><a href="./contenido/drone/">Grabación con Drone</a><a href="./contenido/edicion-video/">Edición de Video</a></div><div><a class="foot-h" href="./crecimiento-digital/">Crecimiento Digital</a><a href="./crecimiento-digital/paginas-web/">Creación de Páginas Web y Landing Pages</a><a href="./crecimiento-digital/marketing/">Marketing Digital</a><a href="./crecimiento-digital/ecommerce/">Ecommerce</a><a href="./crecimiento-digital/ia/">Aplicaciones de IA para Negocios</a></div>
+      <div><a class="foot-h" href="./productos/">Productos</a><a href="./productos/celosias/">Celosías CNC</a><a href="./productos/trofeos/">Trofeos Deportivos</a></div>
     </div>
     <p class="mono muted small">© <span data-year></span> Makro Project · Diseño, fabricación y crecimiento</p>
   </div>
