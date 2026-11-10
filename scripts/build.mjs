@@ -26,6 +26,7 @@ const ICON = {
   lattice: '<rect x="3" y="3" width="18" height="18" rx="1"/><path d="M12 3c-3 3-3 6 0 9s3 6 0 9M12 3c3 3 3 6 0 9s-3 6 0 9"/><path d="M3 12c3-3 6-3 9 0s6 3 9 0"/>',
   trophy: '<path d="M8 21h8M12 17v4"/><path d="M7 4h10v5a5 5 0 0 1-10 0V4Z"/><path d="M7 6H4v1a3 3 0 0 0 3 3M17 6h3v1a3 3 0 0 1-3 3"/>',
   box: '<path d="M21 8 12 3 3 8v8l9 5 9-5V8Z"/><path d="m3 8 9 5 9-5M12 13v8"/>',
+  retail: '<path d="M3 9h18l-1.5-5h-15L3 9Z"/><path d="M3 9a3 3 0 0 0 6 0 3 3 0 0 0 6 0 3 3 0 0 0 6 0"/><path d="M5 12v8h14v-8"/><path d="M10 20v-5h4v5"/>',
   arrow:'<path d="M5 12h14M13 6l6 6-6 6"/>',
 };
 const icon = (k, cls = "ico") =>
@@ -55,7 +56,13 @@ const CATS = [
         id: "interiores", icon: "interior", name: "Diseño de Interiores",
         desc: "Espacios residenciales y comerciales que reflejan quién eres y funcionan para cómo los usas.",
         incl: ["Distribución y planos de mobiliario", "Paleta de materiales y acabados", "Renders del espacio terminado", "Mobiliario a medida (con nuestra área de fabricación)"],
-        para: "Casas, departamentos, oficinas, restaurantes y locales",
+        para: "Casas, departamentos, oficinas y restaurantes",
+      },
+      {
+        id: "retail-design", icon: "retail", name: "Retail Design",
+        desc: "Tiendas, showrooms y puntos de venta diseñados para atraer, guiar al cliente y vender más.",
+        incl: ["Diseño de tiendas y showrooms", "Mobiliario de exhibición y exhibidores", "Islas, módulos y stands para centros comerciales", "Señalética, vitrinas e imagen de marca en el punto de venta"],
+        para: "Marcas, tiendas, franquicias y pop-ups",
       },
     ],
   },
@@ -281,7 +288,7 @@ ${nav("./")}
   <div class="wrap hero-in">
     <p class="eyebrow mono">// Estudio de diseño, fabricación y crecimiento</p>
     <h1>De la idea<br>al <span class="hl">mercado</span>,<br>en un solo lugar.</h1>
-    <p class="lead">Diseñamos tu proyecto, lo fabricamos, le damos identidad y lo ponemos a vender. Catorce servicios, un solo equipo.</p>
+    <p class="lead">Diseñamos tu proyecto, lo fabricamos, le damos identidad y lo ponemos a vender. Quince servicios, un solo equipo.</p>
     <div class="hero-cta">
       <a class="btn" href="#servicios">Ver servicios ${icon("arrow", "ico-sm")}</a>
       <a class="btn btn-ghost" href="#contacto">Cotizar proyecto</a>
@@ -316,7 +323,7 @@ ${nav("./")}
   <div class="wrap">
     <div class="sec-head">
       <p class="eyebrow mono">// Todos los servicios</p>
-      <h2>Catorce servicios, un equipo</h2>
+      <h2>Quince servicios, un equipo</h2>
     </div>
     <div class="svc-grid">
       ${allServices.map((s, i) => `<a class="svc" href="./${s.cat.slug}/${s.id}/">

@@ -7,7 +7,7 @@ Sitio estático (HTML + CSS + JS, sin dependencias) desplegado en Vercel.
 | Ruta | Página |
 |---|---|
 | `/` | Inicio |
-| `/diseno/` | Diseño y Renders · Diseño Industrial · Diseño de Interiores |
+| `/diseno/` | Diseño y Renders · Diseño Industrial · Diseño de Interiores · Retail Design |
 | `/fabricacion/` | Impresión en 3D · Corte y Grabado CNC |
 | `/marca/` | Branding |
 | `/contenido/` | Fotografía · Fotografía de Producto · Grabación con Drone · Edición de Video |

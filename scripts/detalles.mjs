@@ -52,11 +52,30 @@ export const DETALLES = {
     ],
     necesitamos: ["Ubicación y medidas del espacio (o acceso para medirlo)", "Fotos del estado actual", "Ideas, referencias o estilos que te gustan", "Presupuesto aproximado para la obra y mobiliario"],
     faqs: [
-      ["¿Trabajan espacios comerciales?", "Sí. Diseñamos casas y departamentos, pero también restaurantes, locales, oficinas y showrooms."],
+      ["¿Trabajan espacios comerciales?", "Sí. Diseñamos casas, departamentos, oficinas y restaurantes. Para tiendas y puntos de venta tenemos nuestro servicio de Retail Design."],
       ["¿Pueden fabricar muebles a medida?", "Sí. Con nuestro corte CNC fabricamos mobiliario, repisas, paneles y señalética para tu espacio."],
       ["¿Puedo ver cómo quedará antes de construir?", "Siempre. Cada proyecto incluye renders para que apruebes el diseño antes de invertir en obra."],
     ],
     relacionados: ["renders", "cnc", "fotografia"],
+  },
+
+  "retail-design": {
+    intro: "Una tienda bien diseñada vende por sí sola. Diseñamos puntos de venta que atraen desde afuera, guían al cliente por el recorrido correcto y ponen tus productos en el lugar exacto para venderse, con tu marca presente en cada detalle.",
+    recibes: ["Layout de tienda y recorrido del cliente", "Diseño de mobiliario de exhibición", "Renders del punto de venta terminado", "Planos y especificaciones para fabricar e instalar"],
+    proceso: [
+      ["Diagnóstico", "Conocemos tu marca, tus productos, tu cliente y el espacio."],
+      ["Concepto y layout", "Definimos el recorrido, las zonas de exhibición y el estilo."],
+      ["Renders", "Ves tu tienda terminada y ajustamos antes de construir."],
+      ["Fabricación", "Entregamos planos y podemos fabricar exhibidores y señalética con nuestro taller."],
+    ],
+    necesitamos: ["Ubicación y medidas del local, isla o stand", "Fotos del espacio actual", "Catálogo o tipo de productos que vendes", "Manual o recursos de tu marca", "Fecha de apertura o lanzamiento"],
+    faqs: [
+      ["¿En qué se diferencia del diseño de interiores?", "El retail design se enfoca en vender: cómo entra el cliente, qué ve primero, cómo recorre la tienda y cómo se exhiben los productos para que se compren."],
+      ["¿Diseñan islas y stands para centros comerciales o expos?", "Sí. Diseñamos islas, módulos, stands y pop-ups, además de tiendas completas."],
+      ["¿Pueden fabricar los exhibidores?", "Sí. Con nuestro corte CNC e impresión 3D fabricamos exhibidores, mobiliario, señalética y piezas de marca."],
+      ["¿Trabajan con franquicias?", "Sí. Podemos crear un concepto de tienda que se replique en varias sucursales."],
+    ],
+    relacionados: ["interiores", "cnc", "branding"],
   },
 
   "impresion-3d": {
